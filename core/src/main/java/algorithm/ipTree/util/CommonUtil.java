@@ -28,7 +28,6 @@ public class CommonUtil<T> {
             }
         }
         pointer.setValue(value);
-        System.out.println();
     }
 
     public T get(String ip){
