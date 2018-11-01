@@ -7,6 +7,7 @@ public class IntInput {
 
     public static void main(String[] args){
         int a = 5;
+//        传值的拷贝
         f(a);
 //        还是原值
         System.out.println(a);
