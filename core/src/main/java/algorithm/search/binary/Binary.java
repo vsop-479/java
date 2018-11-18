@@ -8,8 +8,24 @@ import java.util.Random;
  * Created by zhouhui on 2018/11/17.
  */
 public class Binary {
+    //    while(start <= end)
+    public static int nonRecursiveWhile(int[] a, int start, int end, int target){
+        if(a == null || a.length == 0) return -1;
+        int m;
+        while(start <= end){
+            m = (start + end) / 2;
+            if(target == a[m]){
+                return m;
+            }else if(target < a[m]){
+                end  = m - 1;
+            }else{
+                start = m + 1;
+            }
+        }
+        return -2;
+    }
 //    for(; start <= end;)
-    public static int nonRecursive(int[] a, int start, int end, int target){
+    public static int nonRecursiveFor(int[] a, int start, int end, int target){
         if(a == null || a.length == 0) return -1;
         int m;
         for(; start <= end;){
@@ -45,11 +61,15 @@ public class Binary {
         PopSort.print(a);
         System.out.print(recursive(a, 0, a.length - 1, 62));
         System.out.println();
-        System.out.print(nonRecursive(a, 0, a.length - 1, 62));
+        System.out.print(nonRecursiveFor(a, 0, a.length - 1, 62));
+        System.out.println();
+        System.out.print(nonRecursiveWhile(a, 0, a.length - 1, 62));
         System.out.println();
         System.out.println("target: " + target);
         System.out.print(recursive(a, 0, a.length - 1, target));
         System.out.println();
-        System.out.print(nonRecursive(a, 0, a.length - 1, target));
+        System.out.print(nonRecursiveFor(a, 0, a.length - 1, target));
+        System.out.println();
+        System.out.print(nonRecursiveWhile(a, 0, a.length - 1, target));
     }
 }
