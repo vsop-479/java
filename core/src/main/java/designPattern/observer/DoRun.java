@@ -4,7 +4,7 @@ import designPattern.observer.observable.Weather;
 import designPattern.observer.observer.BTV;
 import designPattern.observer.observer.CCTV;
 
-public class Producer {
+public class DoRun {
     public static void main(String[] args){
         Weather w = new Weather();
         w.addObserver(new CCTV());
