@@ -3,7 +3,7 @@ package algorithm.search.btree;
 import algorithm.sort.btree.Factory;
 import algorithm.sort.btree.model.BTree;
 import algorithm.sort.btree.model.Element;
-import algorithm.sort.pop.PopSort;
+import algorithm.util.ArrayUtil;
 
 /**
  * Created by zhouhui on 2018/11/18.
@@ -24,8 +24,8 @@ public class BTreeSearch {
     }
 
     public static void main(String[] args){
-        int[] a = PopSort.getRandom();
-        PopSort.print(a);
+        int[] a = ArrayUtil.generate(10);
+        ArrayUtil.print(a);
         BTree btree = Factory.getBtree(a);
         System.out.println(search(btree, a[4]));
     }

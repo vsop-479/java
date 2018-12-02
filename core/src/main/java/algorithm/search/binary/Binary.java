@@ -1,6 +1,7 @@
 package algorithm.search.binary;
 
 import algorithm.sort.pop.PopSort;
+import algorithm.util.ArrayUtil;
 
 import java.util.Random;
 
@@ -55,10 +56,10 @@ public class Binary {
     }
 
     public static void main(String[] args){
-        int[] a = PopSort.getRandom();
+        int[] a = ArrayUtil.generate(10);
         int target = a[new Random().nextInt(a.length)];
         PopSort.sort(a);
-        PopSort.print(a);
+        ArrayUtil.print(a);
         System.out.print(recursive(a, 0, a.length - 1, 62));
         System.out.println();
         System.out.print(nonRecursiveFor(a, 0, a.length - 1, 62));

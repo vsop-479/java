@@ -2,7 +2,7 @@ package algorithm.sort.btree;
 
 import algorithm.sort.btree.model.BTree;
 import algorithm.sort.btree.model.Element;
-import algorithm.sort.pop.PopSort;
+import algorithm.util.ArrayUtil;
 
 /**
  * Created by zhouhui on 2018/11/18.
@@ -44,6 +44,6 @@ public class Factory {
     }
 
     public static void main(String[] args){
-        getBtree(PopSort.getRandom());
+        getBtree(ArrayUtil.generate(10));
     }
 }
