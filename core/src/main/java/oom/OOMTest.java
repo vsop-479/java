@@ -21,6 +21,8 @@ public class OOMTest {
     private static final int MB = 1024 * 1024;
 
     public static void main(String[] args){
+        //int[] 的元素在dump中不展示，但可以查到：select * from int[] s where s[0] = 1
+        int[] i = new int[]{1, 2, 3, 4, 5, 6};
         byte[] a = new byte[MB * 1000];
         byte[] b = new byte[MB * 1000];
         byte[] c = new byte[MB * 1000];
