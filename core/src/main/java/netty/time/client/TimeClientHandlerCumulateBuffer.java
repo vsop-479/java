@@ -21,7 +21,7 @@ public class TimeClientHandlerCumulateBuffer extends ChannelInboundHandlerAdapte
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg){
         ByteBuf m = (ByteBuf) msg;
-//        将读到的数据写到buffer
+//        将读到的数据累积写到另一个buffer
         buf.writeBytes(m);
         m.release();
 
