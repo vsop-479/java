@@ -9,6 +9,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import netty.echo.EchoServerHandler;
 
+import java.util.concurrent.Executors;
+
 public class TimeServer {
     private int port;
 
@@ -17,8 +19,8 @@ public class TimeServer {
     }
 
     public void run() throws Exception{
-        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
-        NioEventLoopGroup workerGroup = new NioEventLoopGroup();
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        NioEventLoopGroup workerGroup = new NioEventLoopGroup(2);
         try{
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)

@@ -8,6 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
+//    连接成功，注册到worker nioEventLoop后，即调用channelActive，关闭连接。
     @Override
     public void channelActive(final ChannelHandlerContext ctx){
         final ByteBuf time = ctx.alloc().buffer(4);
