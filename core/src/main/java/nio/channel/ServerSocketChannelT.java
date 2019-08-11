@@ -2,6 +2,7 @@ package nio.channel;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
@@ -30,6 +31,7 @@ public class ServerSocketChannelT {
             SocketChannel socketChannel = serverSocketChannel.accept();
             if(socketChannel != null){
                 //do something with socketChannel...
+                Socket socket = socketChannel.socket();
             }
         }
     }
