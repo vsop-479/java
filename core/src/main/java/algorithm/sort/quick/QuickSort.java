@@ -4,6 +4,9 @@ import algorithm.util.ArrayUtil;
 
 /**
  * Created by zhouhui on 2018/12/1.
+ *  * keys:
+ * 1：一趟排序过后，基准值所在的位置已经确定。
+ * 2：再分别对基准值前后的数组进行快排。
  */
 public class QuickSort{
 
