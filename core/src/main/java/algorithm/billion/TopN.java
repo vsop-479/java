@@ -17,6 +17,9 @@ public class TopN {
 
     public static List getMax(int len, int[] a){
         int[] t = new int[len];
+//        使用linkedlist插入效率高，但不能真正二分查找。
+//        使用数组可以二分查找，但插入效率低。
+//        推荐使用堆。
         List list = new LinkedList();
         for(int i = 0; i < len; i++){
             list.add(a[i]);
