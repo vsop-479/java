@@ -6,13 +6,17 @@ import java.util.Random;
  * Created by zhouhui on 2018/12/1.
  */
 public class ArrayUtil {
-    public static int[] generate(int length){
+    public static int[] generate(int length, int max){
         Random random = new Random();
         int[] a = new int[length];
         for(int i = 0; i < a.length; i++){
-            a[i] = random.nextInt(100);
+            a[i] = random.nextInt(max);
         }
         return a;
+    }
+
+    public static int[] generate(int length){
+        return generate(length, 100);
     }
 
     public static void print(int[] a){
