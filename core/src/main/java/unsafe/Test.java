@@ -24,7 +24,8 @@ public class Test {
      * @throws IllegalAccessException
      */
     public static Unsafe getReflect() throws NoSuchFieldException, IllegalAccessException {
-        Field theUnsafe = Unsafe.class.getDeclaredField("theUnsafe");
+        Class<Unsafe> unsafeClass = Unsafe.class;
+        Field theUnsafe = unsafeClass.getDeclaredField("theUnsafe");
         theUnsafe.setAccessible(true);
         Unsafe unsafe = (Unsafe) theUnsafe.get(null);
         return unsafe;
