@@ -26,6 +26,10 @@ import algorithm.util.ArrayUtil;
  *
  * 堆排序
  * 取出根节点（最大/最小），然后将最后一个元素放到根节点，下沉根节点构建堆。
+ *
+ * 合并M个有序的数组/链表
+ * M个节点的堆，每个节点为一个数组，值为第一个元素。
+ * 构建小顶堆，取堆顶元素，后堆顶值为数组的下一个元素，然后下沉，再取堆。
  */
 public class MaxMinHeap {
     public static void main(String[] args){
