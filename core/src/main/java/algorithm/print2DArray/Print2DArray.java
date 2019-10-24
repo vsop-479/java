@@ -2,14 +2,19 @@ package algorithm.print2DArray;
 
 /**
  * 顺时针打印二维数组。
+ * 1：以Min(height, weight) / 2计算环数。
+ * 2：如果Min(height, weight)为奇数：
+ *     min为height时，打印剩余的一行;
+ *     min为weight时，打印剩余一列。
  */
 public class Print2DArray {
     public static void print2DArray(int[][] a){
         int height = a.length;
         int weight = a[0].length;
 
-        int mid = height / 2;
-        int reminder = height % 2;
+        int min = Math.min(height, weight);
+        int mid = min / 2;
+        int reminder = min % 2;
 
 //        先打印mid个环。
         for(int i = 0; i < mid; i++){
@@ -30,11 +35,20 @@ public class Print2DArray {
                 System.out.print(a[j][i] + ", ");
             }
         }
-//        当height为奇数时，mid个环后，剩余一行。
+//        当min为奇数时，mid个环后，打印剩余一行或一列。
         if(reminder == 1){
-            for(int j = mid; j < weight - mid; j++){
-                System.out.print(a[mid][j] + ", ");
+//            打印剩余一行。
+            if(weight >= height){
+                for(int j = mid; j < weight - mid; j++){
+                    System.out.print(a[mid][j] + ", ");
+                }
+            }else{
+//               打印剩余一列。
+                for(int j = mid; j < height - mid; j++){
+                    System.out.print(a[j][mid] + ", ");
+                }
             }
+
         }
         System.out.println();
     }
@@ -51,13 +65,10 @@ public class Print2DArray {
 
         print2DArray(a);
 
-        int[][] b = new int[6][3];
+        int[][] b = new int[3][3];
         b[0] = new int[]{1, 2, 3};
         b[1] = new int[]{4, 5, 6};
         b[2] = new int[]{7, 8, 9};
-        b[3] = new int[]{10, 11, 12};
-        b[4] = new int[]{13, 14, 15};
-        b[5] = new int[]{16, 17, 18};
 
         print2DArray(b);
 
