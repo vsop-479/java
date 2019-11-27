@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 结论：
+ * 1：OutOfMemoryError 和其他error，exception一样：
+ *      如果捕获，程序可以继续运行；如果不捕获，程序退出（后面代码不再运行）。
+ * 2：无论程序是否退出，HeapDumpOnOutOfMemoryError都能获取dump。
+ *
  * VM options: -Xms2048m -Xmx2048m
  * test1: 直接运行
  * 结果：得到异常日志java.lang.OutOfMemoryError: Java heap space，程序退出。
