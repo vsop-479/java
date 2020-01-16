@@ -6,7 +6,10 @@ public class CompletionServiceTest {
     private void f() throws InterruptedException, ExecutionException {
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         CompletionService<Result> completionService = new ExecutorCompletionService<>(executor);
-        completionService.submit(new A("s", 1));
+        Future<Result> future = completionService.submit(new A("s", 1));
+//        等future执行完成。
+        Result result1 = future.get();
+//        取出一个完成的future，没有则等待。
         Future<Result> take = completionService.take();
         Result result = take.get();
     }
