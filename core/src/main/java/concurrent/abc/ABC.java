@@ -19,7 +19,7 @@ public class ABC {
 }
 
 class A implements Runnable{
-    private Lock lock = new ReentrantLock();
+    private Lock lock;
     private Signal signal;
     private int limit;
 
@@ -50,7 +50,7 @@ class A implements Runnable{
 }
 
 class B implements Runnable{
-    private Lock lock = new ReentrantLock();
+    private Lock lock;
     private Signal signal;
     private int limit;
 
@@ -81,7 +81,7 @@ class B implements Runnable{
 }
 
 class C implements Runnable{
-    private Lock lock = new ReentrantLock();
+    private Lock lock;
     private Signal signal;
     private int limit;
 
