@@ -1,7 +1,7 @@
 package algorithm.inplace;
 
-public class CompressionArray {
-    public static void compression(char[] chars){
+public class CompressArray {
+    public static void compress(char[] chars){
         char count = 1;
         int i = 0;
         char current = chars[0];
@@ -35,6 +35,6 @@ public class CompressionArray {
     }
     public static void main(String[] args) {
         char[] chars = new char[]{'a', 'a', 'a', 'b', 'b'};
-       compression(chars);
+       compress(chars);
     }
 }
