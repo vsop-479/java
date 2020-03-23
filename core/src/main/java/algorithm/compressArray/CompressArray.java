@@ -1,4 +1,4 @@
-package algorithm.inplace;
+package algorithm.compressArray;
 
 public class CompressArray {
     public static void compress(char[] chars){
