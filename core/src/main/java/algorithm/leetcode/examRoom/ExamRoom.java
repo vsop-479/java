@@ -44,7 +44,7 @@ public class ExamRoom {
         }else if(targetEnd == a.length - 1){
             target = targetEnd;
         }else if(targetStart > 0){
-            target = targetStart + targetEnd / 2;
+            target = (targetStart + targetEnd) / 2;
         }
 
         if(target != -1){
@@ -58,9 +58,17 @@ public class ExamRoom {
     }
 
     public static void main(String[] args){
-        ExamRoom examRoom = new ExamRoom(9);
-        int seat0 = examRoom.seat();
-        int seat1 = examRoom.seat();
-        System.out.println();
+        ExamRoom examRoom = new ExamRoom(10);
+        int seat = examRoom.seat();
+        System.out.println(seat);
+        seat = examRoom.seat();
+        System.out.println(seat);
+        seat = examRoom.seat();
+        System.out.println(seat);
+        seat = examRoom.seat();
+        System.out.println(seat);
+        examRoom.leave(4);
+        seat = examRoom.seat();
+        System.out.println(seat);
     }
 }
