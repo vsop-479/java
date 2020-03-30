@@ -13,47 +13,43 @@ public class ExamRoom {
     }
 
     public int seat() {
-        if(a[0] == 0){
-            a[0] = 1;
-            return 0;
-        }
         int maxS = 0;
-        int currentStart = 0, currentEnd = 0;
-        int targetStart = 0, targetEnd = 0, target;
+        int currentStart = -1, currentEnd = -1, currentS = 0;
+        int targetStart = -1, targetEnd = -1, target = -1;
         boolean startFlag = false;
 
         for(int i = 0; i < a.length; i++){
-            if(!startFlag && a[i] == 1 && a[i + 1] == 0){
+            if(!startFlag && a[i] == 0){
                 currentStart = i;
                 startFlag = true;
             }
-
-            if(i > currentStart && startFlag &&
-                    ((a[i] == 1 && a[i - 1] == 0) || ( i == a.length - 1))){
+            if(startFlag && a[i] == 0 &&
+                    (i == a.length - 1 || a[i + 1] == 1)){
                 currentEnd = i;
                 startFlag = false;
-                if(currentEnd - currentStart > maxS){
-                    maxS = currentEnd - currentStart;
+                currentS = currentEnd - currentStart + 1;
+                if(currentStart == 0 || currentEnd == a.length - 1){
+                    currentS = currentS * 2;
+                }
+                if(currentS > maxS){
+                    maxS = currentS;
                     targetStart = currentStart;
                     targetEnd = currentEnd;
-
-                    if(maxS >= a.length / 2) break;
                 }
             }
-
-            if(!startFlag && a[i] == 1 && a[i + 1] == 0){
-                currentStart = i;
-                startFlag = true;
-            }
-
         }
 
-        if(targetStart + 1 == targetEnd){
-            return -1;
+        if(targetStart == 0){
+            target = 0;
+        }else if(targetEnd == a.length - 1){
+            target = targetEnd;
+        }else if(targetStart > 0){
+            target = targetStart + targetEnd / 2;
         }
 
-        target = targetStart + targetEnd / 2;
-        a[target] = 1;
+        if(target != -1){
+            a[target] = 1;
+        }
         return target;
     }
 
