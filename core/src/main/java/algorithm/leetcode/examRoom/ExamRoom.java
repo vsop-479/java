@@ -28,10 +28,11 @@ public class ExamRoom {
                 currentEnd = i;
                 startFlag = false;
                 currentS = currentEnd - currentStart + 1;
-                if(currentStart == 0 || currentEnd == a.length - 1){
-                    currentS = currentS * 2;
+                if(currentStart != 0 && currentEnd != a.length - 1){
+                    currentS = currentS %2 == 0 ? currentS / 2 : currentS / 2 + 1;
                 }
-                if(currentS > maxS){
+
+                if(currentS / 2 > maxS / 2){
                     maxS = currentS;
                     targetStart = currentStart;
                     targetEnd = currentEnd;
