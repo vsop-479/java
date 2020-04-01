@@ -32,10 +32,14 @@ public class ExamRoom {
                     currentS = currentS %2 == 0 ? currentS / 2 : currentS / 2 + 1;
                 }
 
-                if(currentS / 2 > maxS / 2){
+                if(currentS > maxS){
                     maxS = currentS;
                     targetStart = currentStart;
                     targetEnd = currentEnd;
+                }
+
+                if(currentS >= a.length / 2){
+                    break;
                 }
             }
         }
@@ -59,7 +63,7 @@ public class ExamRoom {
     }
 
     public static void main(String[] args){
-        ExamRoom examRoom = new ExamRoom(10);
+        ExamRoom examRoom = new ExamRoom(4);
         int seat = examRoom.seat();
         System.out.println(seat);
         seat = examRoom.seat();
@@ -68,7 +72,8 @@ public class ExamRoom {
         System.out.println(seat);
         seat = examRoom.seat();
         System.out.println(seat);
-        examRoom.leave(4);
+        examRoom.leave(1);
+        examRoom.leave(3);
         seat = examRoom.seat();
         System.out.println(seat);
     }
