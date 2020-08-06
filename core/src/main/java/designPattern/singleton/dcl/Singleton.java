@@ -4,12 +4,12 @@ package designPattern.singleton.dcl;
  * Created by zhouhui on 2018/11/25.
  */
 public class Singleton {
-//    Èç¹û²»¼Óvolatile£¬ÆäËûÏß³Ì²»ÄÜÁ¢¼´¿´¼ûsingleton£¬»áÔÙ´Înew.
+//    å¦‚æœä¸åŠ volatileï¼Œå…¶ä»–çº¿ç¨‹ä¸èƒ½ç«‹å³çœ‹è§singletonï¼Œä¼šå†æ¬¡new.
     private static volatile Singleton singleton = null;
     private Singleton(){}
 
     public static Singleton get(){
-//       todo warning:ÆäËûÏß³Ì¿ÉÒÔÔÚ´Ë¿´¼ûÎ´¹¹ÔìÍê³ÉµÄsingleton¡£
+//     1.5ä¹‹å‰çš„volatileï¼Œæ²¡æœ‰happens-beforeï¼Œvolatileä¸ç¦ç”¨é‡æ’åºã€‚å…¶ä»–çº¿ç¨‹å¯ä»¥åœ¨æ­¤çœ‹è§æœªæ„é€ å®Œæˆçš„singletonã€‚
         if(singleton == null){
             synchronized(Singleton.class) {
                 if(singleton == null){
