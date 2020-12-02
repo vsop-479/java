@@ -1,7 +1,5 @@
 package algorithm.training.search.binarySearch;
 
-import algorithm.util.ArrayUtil;
-
 public class Solution {
     public static int search(int[] a, int target){
         int start = 0;
