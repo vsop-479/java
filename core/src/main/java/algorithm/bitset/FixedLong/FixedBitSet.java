@@ -22,8 +22,8 @@ public class FixedBitSet {
 //        fixedBitSet.set(0, 1_000_000);
 //        boolean b = fixedBitSet.get(50);
 //        b = fixedBitSet.get(27);
-        fixedBitSet.set(27);
-        boolean b = fixedBitSet.get(27);
+        fixedBitSet.set(70);
+        boolean b = fixedBitSet.get(70);
 
 
     }
