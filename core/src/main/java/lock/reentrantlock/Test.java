@@ -12,19 +12,23 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Test {
     private ReentrantLock lock = new ReentrantLock(false);
     public void l1(){
+        lock.lock();// block until condition holds
         try{
-            lock.lock();
+            //do something under lock.
             System.out.println("f getHoldCount: " + lock.getHoldCount());
             l2();
         }finally {
+            //release lock.
             lock.unlock();
         }
     }
     public void l2(){
         if(lock.tryLock()){
             try{
+                //do something under lock.
                 System.out.println("g getHoldCount: " + lock.getHoldCount());
             }finally {
+                //release lock.
                 lock.unlock();
             }
         }
