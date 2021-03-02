@@ -3,7 +3,9 @@ package algorithm.shortestRoad2DArray;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution {
+//dynamic programming: shortest[i][j] = min(shortest[i][j - 1], shortest[i - 1][j]) + a[i][j]
+public class DPSolution {
+
     //fill all road, then find the path.
     public static int getRoad(int arr[][])
     {

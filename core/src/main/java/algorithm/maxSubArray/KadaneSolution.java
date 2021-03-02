@@ -1,6 +1,6 @@
 package algorithm.maxSubArray;
 
-public class Solution {
+public class KadaneSolution {
     //https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
     public static void main (String[] args)
     {
