@@ -32,6 +32,30 @@ import algorithm.util.ArrayUtil;
  * 构建小顶堆，取堆顶元素，后堆顶值为数组的下一个元素，然后下沉，再取堆。
  */
 public class MaxMinHeap {
+    //    sort: get a min top heap, remove the top node(to sort), move last node to top, rebuilding the min top heap...
+    //direct shift current.
+    public static void minTopHeapCurrent(int[] a){
+        for(int i = a.length -1; i >= 0; i--){
+            shiftForMinTopHeapCurrent(a, i);
+        }
+    }
+    //direct use current. not use parent.
+    public static void shiftForMinTopHeapCurrent(int[] a, int current){
+        int leftChild = current * 2 + 1;
+        int rightChild = current * 2 + 2;
+        if(leftChild < a.length){
+            if(rightChild < a.length) {
+                if (a[rightChild] < a[leftChild] && a[rightChild] < a[current]) {
+                    ArrayUtil.swap(a, rightChild, current);
+                } else if (a[leftChild] < a[rightChild] && a[leftChild] < a[current]) {
+                    ArrayUtil.swap(a, leftChild, current);
+                }
+            }else if(a[leftChild] < a[current]){
+                ArrayUtil.swap(a, leftChild, current);
+            }
+        }
+    }
+
     public static void main(String[] args){
         int[] a = ArrayUtil.generate(10);
         ArrayUtil.print(a);
@@ -57,6 +81,7 @@ public class MaxMinHeap {
      * @param a
      */
     public static void shiftDownForMax(int k, int[] a){
+//        fool code, cause adjust in for loop. shiftDownForMaxSmart
         while(2 * k + 1 < a.length){
             int p = a[k];
             int ms = a[2 * k + 1];
@@ -71,6 +96,22 @@ public class MaxMinHeap {
                 k = msp;
             }else{
                 break;
+            }
+        }
+    }
+
+    public static void shiftDownForMaxSmart(int k, int[] a){
+        if(2 * k + 1 < a.length){
+            int p = a[k];
+            int ms = a[2 * k + 1];
+            int msp = 2 * k + 1;
+            if(2 * k + 2 < a.length && a[2 * k + 2] > ms){
+                ms = a[2 * k + 2];
+                msp = 2 * k + 2;
+            }
+            if(ms > p){
+                a[k] = ms;
+                a[msp] = p;
             }
         }
     }

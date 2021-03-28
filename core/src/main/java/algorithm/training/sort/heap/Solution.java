@@ -44,6 +44,29 @@ public class Solution {
         return 0;
     }
 
+    //    sort: get a min top heap, remove the top node(to sort), move last node to top, rebuilding the min top heap...
+    public static void minTopHeapCurrent(int[] a){
+        for(int i = a.length -1; i >= 0; i--){
+            shiftForMinTopHeapCurrent(a, i);
+        }
+    }
+    //direct use current. not use parent.
+    public static void shiftForMinTopHeapCurrent(int[] a, int current){
+        int leftChild = current * 2 + 1;
+        int rightChild = current * 2 + 2;
+        if(leftChild < a.length){
+            if(rightChild < a.length) {
+                if (a[rightChild] < a[leftChild] && a[rightChild] < a[current]) {
+                    ArrayUtil.swap(a, rightChild, current);
+                } else if (a[leftChild] < a[rightChild] && a[leftChild] < a[current]) {
+                    ArrayUtil.swap(a, leftChild, current);
+                }
+            }else if(a[leftChild] < a[current]){
+                    ArrayUtil.swap(a, leftChild, current);
+            }
+        }
+    }
+
     public static int shiftForMaxTopHeap(int[] a, int current){
         int parent = (current - 1) / 2;
         if(parent >= 0 && parent < a.length){
@@ -69,8 +92,14 @@ public class Solution {
     public static void main(String[] args){
         int[] a = ArrayUtil.generate(10, 100);
         ArrayUtil.print(a);
+        minTopHeapCurrent(a);
+        ArrayUtil.print(a);
+
+        a = ArrayUtil.generate(10, 100);
+        ArrayUtil.print(a);
         minTopHeap(a);
         ArrayUtil.print(a);
+
         maxTopHeap(a);
         ArrayUtil.print(a);
 
