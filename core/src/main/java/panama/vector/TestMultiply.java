@@ -13,9 +13,16 @@ public class TestMultiply {
 
 	public static void main(String[] args) {
 		init();
+		long t0 = System.nanoTime();
 		multiply();
+		long t1 = System.nanoTime();
 		multiplyUnrolled();
+		long t2 = System.nanoTime();
 		multiplyVector2();
+		long t3 = System.nanoTime();
+		System.out.println("multiply: " + (t1 - t0));
+		System.out.println("multiplyUnrolled: " + (t2 - t1));
+		System.out.println("multiplyVector2: " + (t3 - t2));
 	}
 
 	public static void multiplyVector2() {
@@ -23,22 +30,11 @@ public class TestMultiply {
 		for (; i < IntVector.SPECIES_128.loopBound(a.length); i += IntVector.SPECIES_128.length()) {
 			IntVector vectorA = IntVector.fromArray(IntVector.SPECIES_128, a, i);
 			IntVector vectorB = IntVector.fromArray(IntVector.SPECIES_128, b, i);
+			// C[0] = A[0] * B[0], ..., C[3] = A[3] * B[3]并行计算。
 			IntVector vectorC = vectorA.mul(vectorB);
 			vectorC.intoArray(c, i);
 		}
 		System.out.println(c[LEN - 1]);
-	}
-
-
-	public static void multiplyVector() {
-		int i = 0;
-		IntVector vectorA = IntVector.fromArray(IntVector.SPECIES_128, a, 0);
-		IntVector vectorB = IntVector.fromArray(IntVector.SPECIES_128, b, 0);
-		IntVector vectorC = vectorA.mul(vectorB);
-		c = vectorC.toArray();
-		// sum.
-		int sum = vectorA.reduceLanes(VectorOperators.ADD);
-		System.out.println(sum);
 	}
 
 	/**

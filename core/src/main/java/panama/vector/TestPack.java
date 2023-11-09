@@ -28,11 +28,13 @@ public class TestPack {
 		int inOffset = 0;
 		int outOffset = 0;
 		IntVector outVec;
+		// 读取input中4个int到vector。
 		IntVector inVec = IntVector.fromArray(SPECIES_128, input, inOffset);
 		outVec = inVec;
 		inVec = IntVector.fromArray(SPECIES_128, input, inOffset += 4);
 
 		// inVector左移，空出23位，存放outVec
+		// inVec和outVec的or运算，并行。vector中4个int的左移，是否也是并行？
 		outVec = inVec.lanewise(VectorOperators.LSHL, 23).or(outVec);
 		// 此时outVector的32bit中，高9bit存放了inVector的低9bit，低23bit存放了原来的outVec。
 		outVec.intoArray(output, outOffset);
