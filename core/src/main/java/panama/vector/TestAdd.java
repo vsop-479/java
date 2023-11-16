@@ -17,10 +17,30 @@ public class TestAdd {
   private static final VectorSpecies<Integer> SPECIES_256 = IntVector.SPECIES_256;
   private static final VectorSpecies<Integer> SPECIES = IntVector.SPECIES_128;
 
+  public static void main(String[] args) {
+// scalar will be auto unrolled, auto vectorized by JIT.
+    // unroll will not be auto vectorized by JIT.
+    // vector will be auto unrolled by JIT.
+  }
+
   // Auto-Vectorization works
-  public static int[] iterator(){
+  public static int[] scalarDefault(){
     for(int i = 0; i < a.length; ++i){
       a[i] = a[i] + b[i];
+    }
+    return a;
+  }
+
+  public static int[] unroll(){
+    for(int i = 0; i < a.length; i += 8){
+      a[i] = a[i] + b[i];
+      a[i + 1] = a[i + 1] + b[i + 1];
+      a[i + 2] = a[i + 2] + b[i + 2];
+      a[i + 3] = a[i + 3] + b[i + 3];
+      a[i + 4] = a[i + 4] + b[i + 4];
+      a[i + 5] = a[i + 5] + b[i + 5];
+      a[i + 6] = a[i + 6] + b[i + 6];
+      a[i + 7] = a[i + 7] + b[i + 7];
     }
     return a;
   }
@@ -49,30 +69,7 @@ public class TestAdd {
     return a;
   }
 
-  public static void main(String[] args) {
-    init();
-    iterator();
-    vectorLoopBound();
-    vectorIndexRange();
-    long t0 = System.nanoTime();
-    iterator();
-    iterator();
-    iterator();
-    long t1 = System.nanoTime();
-    vectorLoopBound();
-    vectorLoopBound();
-    vectorLoopBound();
-    long t2 = System.nanoTime();
-    vectorIndexRange();
-    vectorIndexRange();
-    vectorIndexRange();
-    long t3 = System.nanoTime();
-    System.out.println("iterator: " + (t1 - t0));
-    System.out.println("vectorLoopBound: " + (t2 - t1));
-    System.out.println("vectorIndexRange: " + (t3 - t2));
-    System.out.println(equals(iterator(), vectorLoopBound()));
-    System.out.println(equals(iterator(), vectorIndexRange()));
-  }
+
 
   public static void init(){
     Random random = new Random();

@@ -17,27 +17,7 @@ public class TestMax {
   private static final VectorSpecies<Integer> SPECIES = IntVector.SPECIES_128;
 
   public static void main(String[] args){
-    init();
-    iterator();
-    vector();
-    long t0 = System.nanoTime();
-    iterator();
-    iterator();
-    iterator();
-    long t1 = System.nanoTime();
-    unrolled();
-    unrolled();
-    unrolled();
-    long t2 = System.nanoTime();
-    vector();
-    vector();
-    vector();
-    long t3 = System.nanoTime();
-    System.out.println("iterator: " + (t1 - t0));
-    System.out.println("unrolled: " + (t2 - t1));
-    System.out.println("vector: " + (t3 - t2));
-    System.out.println(equals(iterator(), vector()));
-    System.out.println(equals(iterator(), unrolled()));
+    // scalar will be auto unrolled, auto vectorized by jit.
   }
 
   public static void init(){
@@ -48,6 +28,7 @@ public class TestMax {
     }
   }
 
+  // Auto-Vectorization
   public static int[] iterator(){
     for(int i = 0; i < a.length; ++i){
       a[i] = Math.max(a[i], b[i]);
@@ -72,11 +53,43 @@ public class TestMax {
 
   public static int[] vector(){
     int i = 0;
-    for (; i < SPECIES_128.loopBound(a.length); i += SPECIES_128.length()) {
-      IntVector vectorA = IntVector.fromArray(SPECIES_128, a, i);
-      IntVector vectorB = IntVector.fromArray(SPECIES_128, b, i);
+    int count = 0;
+    for (; i < SPECIES.loopBound(a.length); i += SPECIES.length()) {
+      IntVector vectorA = IntVector.fromArray(SPECIES, a, i);
+      IntVector vectorB = IntVector.fromArray(SPECIES, b, i);
       IntVector vectorC = vectorA.max(vectorB);
       vectorC.intoArray(a, i);
+    }
+    return a;
+  }
+
+  public static int[] vectorUnrolled(){
+    int i = 0;
+    IntVector vectorC1 = IntVector.zero(SPECIES);
+    IntVector vectorC2 = IntVector.zero(SPECIES);
+    IntVector vectorC3 = IntVector.zero(SPECIES);
+    IntVector vectorC4 = IntVector.zero(SPECIES);
+    for (; i < SPECIES.loopBound(a.length); i += SPECIES.length() * 4) {
+      IntVector vectorA1 = IntVector.fromArray(SPECIES, a, i);
+      IntVector vectorB1 = IntVector.fromArray(SPECIES, b, i);
+      vectorC1 = vectorA1.max(vectorB1);
+
+      IntVector vectorA2 = IntVector.fromArray(SPECIES, a, i + SPECIES.length());
+      IntVector vectorB2 = IntVector.fromArray(SPECIES, b, i + SPECIES.length());
+      vectorC2 = vectorA2.max(vectorB2);
+
+      IntVector vectorA3 = IntVector.fromArray(SPECIES, a, i + 2 * SPECIES.length());
+      IntVector vectorB3 = IntVector.fromArray(SPECIES, b, i + 2 * SPECIES.length());
+      vectorC3 = vectorA3.max(vectorB3);
+
+      IntVector vectorA4 = IntVector.fromArray(SPECIES, a, i + 3 * SPECIES.length());
+      IntVector vectorB4 = IntVector.fromArray(SPECIES, b, i + 3 * SPECIES.length());
+      vectorC4 = vectorA4.max(vectorB4);
+
+      vectorC1.intoArray(a, i);
+      vectorC2.intoArray(a, i + SPECIES.length());
+      vectorC3.intoArray(a, i + 2 * SPECIES.length());
+      vectorC4.intoArray(a, i + 3 * SPECIES.length());
     }
     return a;
   }
